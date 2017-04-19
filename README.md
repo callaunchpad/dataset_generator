@@ -1,0 +1,2 @@
+# dataset_generator
+Leverage text parsing and web scraping to create custom image data sets.
