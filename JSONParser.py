@@ -2,7 +2,8 @@ import gzip
 
 
 text_file = open("Product_Titles.txt", "w")
-key = 'title'
+key1 = 'title'
+key2 = ''
 
 with gzip.open("metadata.json.gz", "rb") as f:
 		print("Unzipping metadata...")
@@ -10,7 +11,7 @@ with gzip.open("metadata.json.gz", "rb") as f:
 		print("Dumping...")
 		d = u.split("\n")
 		for i in d:
-			if key in i:
+			if key1 in i and key2 in i and:
 				try:
 					w = eval(i)[key] + ""
 					text_file.write(w + "\n")
