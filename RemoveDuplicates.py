@@ -9,7 +9,11 @@ unique_list = []
 for x in d:
 	if x is not None and x not in unique_list:
 		print(x)
-		unique_list.append(x)
+		y = x.replace("&amp;", "&")
+		y = y.replace("&reg;", "")
+		y = y.replace("&quot;", "\"")
+		print(y)
+		unique_list.append(y)
 
 text_file.seek(0)
 text_file.truncate()
