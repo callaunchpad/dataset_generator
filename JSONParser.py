@@ -1,8 +1,13 @@
 import ast
 import gzip
+import multiprocessing
+
+from joblib import Parallel, delayed
 
 
 rank = 250
+num_cores = multiprocessing.cpu_count()
+eval_func = ast.literal_eval
 
 def validate(d):
 	if any(value < rank for value in d.values()):
@@ -18,11 +23,11 @@ with gzip.open("metadata.json.gz", "rb") as f:
 	u = f.read().decode("ascii")
 	print("Dumping...")
 	d = u.split("\n")
-	d = [ast.literal_eval(s) for s in d if s]
+	# d = [ast.literal_eval(s) for s in d if s]
+	d = Parallel(n_jobs=num_cores)(delayed(eval_func)(ss) for ss in s if ss)
 	print("Eval done! Writing to file...")
 	for i in d:
 		print(i)
-		ii = ast.literal_eval(i)
 		if key1 in i and key2 in i and validate(i[key2]):
 			try:
 				w = i[key1] + ""
